@@ -3,6 +3,7 @@
 // Purpose: This object will get hover events and can be attached to the hands
 //
 //=============================================================================
+//david baron-vega edited on 03.28.24
 
 using UnityEngine;
 using UnityEngine.Events;
@@ -366,6 +367,17 @@ namespace Valve.VR.InteractionSystem
 
             if (highlightHolder != null)
                 Destroy(highlightHolder);
+
         }
+        public void ResetHighlight()
+        {
+            if (highlightHolder != null)
+            {
+             Destroy(highlightHolder);
+            highlightHolder = null;
+            }
+            // Reset other necessary states if needed. -DBV
+        }
+
     }
 }

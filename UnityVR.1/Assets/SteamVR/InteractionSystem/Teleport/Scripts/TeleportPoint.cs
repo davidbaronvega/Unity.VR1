@@ -1,10 +1,11 @@
 ﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 //
 // Purpose: Single location that the player can teleport to
-//
+// David Baron-Vega, gf7068
 //=============================================================================
 
 #if UNITY_UGUI_UI || !UNITY_2019_2_OR_NEWER
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 #if UNITY_EDITOR
@@ -222,17 +223,18 @@ namespace Valve.VR.InteractionSystem
 
 
 		//-------------------------------------------------
-		public void TeleportToScene()
-		{
-			if ( !string.IsNullOrEmpty( switchToScene ) )
-			{
-				Debug.Log("<b>[SteamVR Interaction]</b> TeleportPoint: Hook up your level loading logic to switch to new scene: " + switchToScene, this);
-			}
-			else
-			{
-				Debug.LogError("<b>[SteamVR Interaction]</b> TeleportPoint: Invalid scene name to switch to: " + switchToScene, this);
-			}
-		}
+		public void TeleportToScene() //This was changed in order to be able to teleport to any scene in the build settings! -DBV
+{
+    if (!string.IsNullOrEmpty(switchToScene))
+    {
+        Debug.Log($"<b>[SteamVR Interaction]</b> Teleporting to scene: {switchToScene}");
+        SceneManager.LoadScene(switchToScene);
+    }
+    else
+    {
+        Debug.LogError("<b>[SteamVR Interaction]</b> TeleportPoint: Invalid scene name to switch to: " + switchToScene);
+    }
+}
 
 
 		//-------------------------------------------------
